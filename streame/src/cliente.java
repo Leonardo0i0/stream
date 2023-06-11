@@ -1,7 +1,7 @@
 public class cliente {
-    static String usuario= "leo";
-    static String senha= "123";
+    static String usuario;
+    static String senha;
     String email;
-    String numero;
-    int nivel=2, opcao;
+    int numero;
+    int nivel, opcao;
 }
