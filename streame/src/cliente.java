@@ -1,6 +1,6 @@
 public class cliente {
     private String usuario;
-    private String senha;
+    private int senha;
     private String email;
     private int numero;
     private int nivel;
@@ -9,7 +9,7 @@ public class cliente {
         return usuario;
     }
 
-    public String getSenha() {
+    public int getSenha() {
         return senha;
     }
 
@@ -28,7 +28,7 @@ public class cliente {
     void trocarnome(String nome){
         usuario = nome;
     }
-    void trocarsenha(String Senha){
+    void trocarsenha(int Senha){
         senha = Senha;
     }
     void trocaremail(String Email){
