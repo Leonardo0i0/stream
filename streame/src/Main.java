@@ -24,7 +24,7 @@ public class Main {
         clientes[10].trocarnivel(5);
 
         do {
-            System.out.println("1-Criar conta. /n 2- Logar em uma conta./n 3-Sair.");
+            System.out.println("1-Criar conta. \n 2- Logar em uma conta.\n 3-Sair.");
             opcao = teclado.nextInt();
             if (opcao == 1) {
                 System.out.println("Digite seu e-mail:");
