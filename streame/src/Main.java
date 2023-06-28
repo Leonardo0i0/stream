@@ -1,30 +1,30 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        String usuario = null, email = null;
-        int opcao, nivel, numero, senha, senha1, x, c = -1, f = 0, s = 0, a = 0;
+        String usuario = null, email = null, senha, senha1;
+        int opcao, nivel, numero, x, c = 0, f = 0, s = 0, a = 0, resposta=0;
+
         Scanner teclado = new Scanner(System.in);
-        cliente[] clientes = new cliente[11];
-        filme[] filmes = new filme[11];
-        serie[] series = new serie[11];
-        serie[] animes = new serie[11];
 
-        for (x = 0; x < 11; x++) {
-            clientes[x] = new cliente();
-            filmes[x] = new filme();
-            series[x] = new serie();
-            animes[x] = new serie();
-        }
+        ArrayList<cliente> clientes = new ArrayList<>();
+        ArrayList<filme> filmes = new ArrayList<>();
+        ArrayList<serie> series = new ArrayList<>();
+        ArrayList<serie> animes = new ArrayList<>();
 
-        clientes[10].trocarnome("Leonardo");
-        clientes[10].trocarnumero(123456);
-        clientes[10].trocaremail("Leonardo@gmail.com");
-        clientes[10].trocarsenha(654321);
-        clientes[10].trocarnivel(5);
+        cliente novoCliente = new cliente();
+
+        novoCliente.trocarnome("Leonardo");
+        novoCliente.trocarnumero(123456);
+        novoCliente.trocaremail("Leonardo@gmail.com");
+        novoCliente.trocarsenha("654321");
+        novoCliente.trocarnivel(5);
+        clientes.add(novoCliente);
+
 
         do {
-            System.out.println("1-Criar conta. \n 2- Logar em uma conta.\n 3-Sair.");
+            System.out.println("1-Criar conta. \n2- Logar em uma conta.\n3-Sair.");
             opcao = teclado.nextInt();
             if (opcao == 1) {
                 System.out.println("Digite seu e-mail:");
@@ -37,13 +37,13 @@ public class Main {
                 usuario = teclado.nextLine();
                 do {
                     System.out.println("Digite a sua senha!");
-                    senha = teclado.nextInt();
+                    senha = teclado.nextLine();
                     System.out.println("Confirme a sua senha!");
-                    senha1 = teclado.nextInt();
-                    if (senha != senha1) {
+                    senha1 = teclado.nextLine();
+                    if (!senha.equals(senha1)) {
                         System.out.println("Senhas diferentes!");
                     }
-                } while (senha != senha1);
+                } while (!senha.equals(senha1));
                 do {
                     System.out.println("Essas são as suas informações:");
                     System.out.println(usuario);
@@ -53,19 +53,15 @@ public class Main {
                     opcao = teclado.nextInt();
                 } while (opcao != 1);
 
-                for (x = 0; x < 10; x++) {
-                    if (numero == clientes[x].getNumero()) {
-                        c = x;
-                    }
-                }
-
                 if (opcao == 1) {
-                    clientes[c].trocaremail(email);
-                    clientes[c].trocarnumero(numero);
-                    clientes[c].trocarnome(usuario);
-                    clientes[c].trocarsenha(senha);
+                    novoCliente.trocarnome(usuario);
+                    novoCliente.trocarnumero(numero);
+                    novoCliente.trocarnome(usuario);
+                    novoCliente.trocarsenha(senha);
+                    clientes.add(novoCliente);
                     System.out.println("Conta criada com sucesso!.");
                 }
+                teclado.nextLine();
                 do {
                     System.out.println("Qual dos nossos planos o senhos deseja?");
                     System.out.println("1- Plano Bronze");
@@ -73,58 +69,62 @@ public class Main {
                     System.out.println("3- plano Gold");
                     System.out.println("4- plano Diamante");
                     System.out.println("Selecione uma das opções para ter mais detalhes");
+                    opcao = teclado.nextInt();
 
                     switch (opcao) {
                         case 1:
-                            nivel = opcao;
                             System.out.println("PLANO BRONZE.");
                             System.out.println("Qualidade de imagem de 480p.");
-                            System.out.println("Ascesso aos nossos produtos a partir de 1 mes apos o lançamento.");
+                            System.out.println("Acesso aos nossos produtos a partir de 1 mês após o lançamento.");
                             System.out.println("Sem compartilhamento de conta.");
-                            System.out.println("O senhor(a) deseja assinar este seviço?1-sim, 2-não");
-                            opcao = teclado.nextInt();
-                            if (opcao == 1) {
-                                clientes[c].trocarnivel(nivel);
-                                System.out.println("Assinatura realizada com sucesso!.");
+                            System.out.println("Deseja assinar este serviço? 1 - Sim, 2 - Não");
+                            resposta = teclado.nextInt();
+                            if (resposta == 1) {
+                                novoCliente.trocarnivel(opcao);
+                                System.out.println("Assinatura realizada com sucesso!");
                             }
                             break;
                         case 2:
-                            nivel = opcao;
                             System.out.println("PLANO PRATA.");
                             System.out.println("Qualidade de imagem de 720p.");
-                            System.out.println("Ascesso aos nossos produtos a partir de 15 dias apos o lançamento.");
+                            System.out.println("Acesso aos nossos produtos a partir de 15 dias após o lançamento.");
                             System.out.println("Compartilhamento de conta com 1 pessoa.");
-                            if (opcao == 1) {
-                                clientes[c].trocarnivel(nivel);
-                                System.out.println("Assinatura realizada com sucesso!.");
+                            System.out.println("Deseja assinar este serviço? 1 - Sim, 2 - Não");
+                            resposta = teclado.nextInt();
+                            if (resposta == 1) {
+                                novoCliente.trocarnivel(opcao);
+                                System.out.println("Assinatura realizada com sucesso!");
                             }
                             break;
                         case 3:
-                            nivel = opcao;
                             System.out.println("PLANO GOLD.");
                             System.out.println("Qualidade de imagem de 1080p.");
-                            System.out.println("Ascesso aos nossos produtos a partir de 7 dias apos o lançamento.");
-                            System.out.println("Compartilhamento de conta com ate 3 pessoas.");
-                            if (opcao == 1) {
-                                clientes[c].trocarnivel(nivel);
-                                System.out.println("Assinatura realizada com sucesso!.");
+                            System.out.println("Acesso aos nossos produtos a partir de 7 dias após o lançamento.");
+                            System.out.println("Compartilhamento de conta com até 3 pessoas.");
+                            System.out.println("Deseja assinar este serviço? 1 - Sim, 2 - Não");
+                            resposta = teclado.nextInt();
+                            if (resposta == 1) {
+                                novoCliente.trocarnivel(opcao);
+                                System.out.println("Assinatura realizada com sucesso!");
                             }
                             break;
                         case 4:
-                            nivel = opcao;
                             System.out.println("PLANO DIAMANTE.");
                             System.out.println("Qualidade de imagem de 480p.");
-                            System.out.println("Ascesso aos nossos produtos a partir de 1 mes apos o lançamento.");
+                            System.out.println("Acesso aos nossos produtos a partir de 1 mês após o lançamento.");
                             System.out.println("Sem compartilhamento de conta.");
-                            if (opcao == 1) {
-                                clientes[c].trocarnivel(nivel);
-                                System.out.println("Assinatura realizada com sucesso!.");
+                            System.out.println("Deseja assinar este serviço? 1 - Sim, 2 - Não");
+                            resposta = teclado.nextInt();
+                            if (resposta == 1) {
+                                novoCliente.trocarnivel(opcao);
+                                System.out.println("Assinatura realizada com sucesso!");
                             }
                             break;
                         default:
-                            System.out.println("opção invalida");
+                            System.out.println("Opção inválida");
                     }
-                } while (opcao != 1);
+
+                } while (resposta != 1);
 
             } else {
                 System.out.println("Insira seu login.");
@@ -132,16 +132,20 @@ public class Main {
                 usuario = teclado.nextLine();
 
                 System.out.println("insira a sua senha.");
-                senha = teclado.nextInt();
-                for (x = 0; x < 11; x++) {
-                    if (usuario.equals(clientes[x].getUsuario())) {
-                        c = x;
+                senha = teclado.nextLine();
+
+                boolean loginEfetuado = false;
+                for (cliente cliente : clientes) {
+                    if (usuario.equals(cliente.getUsuario()) && senha.equals(cliente.getSenha())) {
+                        // Login efetuado com sucesso
+                        System.out.println("Login efetuado com sucesso!");
+                        loginEfetuado = true;
                         break;
                     }
                 }
 
-                if (usuario.equals(clientes[c].getUsuario()) || senha == clientes[c].getSenha()) {
-                    System.out.println("Login efetuado com sucesso!");
+                if (!loginEfetuado) {
+                    System.out.println("Credenciais inválidas. Tente novamente.");
                 }
             }
 
