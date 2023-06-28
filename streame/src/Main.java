@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        String usuario = null, email = null, senha, senha1, nomeFilme;
-        int opcao, nivel, numero, x, c = 0, f = 0, s = 0, a = 0, resposta=0, tamanho;
+        String usuario = null, email = null, senha, senha1, nomeFilme, nomeSerie, nomeAnime;
+        int opcao, nivel, numero, x, c = 0, f = 0, s = 0, a = 0, resposta=0, tamanho, temporada;
         boolean loginEfetuado;
 
         Scanner teclado = new Scanner(System.in);
@@ -17,9 +17,10 @@ public class Main {
         ArrayList<serie> animes = new ArrayList<>();
 
         cliente novoCliente = new cliente();
+        filme novoFilme = new filme();
+        serie novaSerie = new serie();
         filme filmeAtual = null;
-        serie serieAtual;
-        serie animeAtual;
+        serie serieAtual = null;
         cliente clienteLogado = null;
 
         novoCliente.trocarnome("Leonardo");
@@ -164,23 +165,119 @@ public class Main {
                 System.out.println("Escolha qual o senhor deseja ver para ascessar o catalogo completo.");
                 opcao = teclado.nextInt();
 
-                switch (opcao){
-                    case 1:
-                        for (x=0; x < filmes.size(); x++) {
-                            filmeAtual = filmes.get(x);
-                            nomeFilme = filmeAtual.getNome();
-                            System.out.println(x + "-" + nomeFilme);
-                        }
-                        System.out.println("Qual filme deseja assistir?");
-                        opcao = teclado.nextInt();
-                        filmeAtual = filmes.get(opcao);
-                        System.out.println(filmeAtual.getNome());
-                        System.out.println(filmeAtual.getAno());
-                        System.out.println(filmeAtual.getCategoria());
-                        System.out.println(filmeAtual.getSinopse());
-                        System.out.println(filmeAtual.getTempo()+"H");
-                        break;
-                }
+                do {
+                    switch (opcao){
+                        case 1:
+                            for (x=0; x < filmes.size(); x++) {
+                                filmeAtual = filmes.get(x);
+                                nomeFilme = filmeAtual.getNome();
+                                System.out.println(x + "-" + nomeFilme);
+                            }
+                            System.out.println("Qual filme deseja ascessar?");
+                            opcao = teclado.nextInt();
+                            filmeAtual = filmes.get(opcao);
+                            System.out.println(filmeAtual.getNome());
+                            System.out.println(filmeAtual.getAno());
+                            System.out.println(filmeAtual.getCategoria());
+                            System.out.println(filmeAtual.getSinopse());
+                            System.out.println(filmeAtual.getTempo()+"H");
+                            System.out.println("1-Iniciar\n2-Sair");
+                            opcao = teclado.nextInt();
+                            if (opcao == 1){
+                                System.out.println("Reprodozindo filme");
+                            }
+                            System.out.println("1-Sair");
+                            resposta = teclado.nextInt();
+                            break;
+                        case 2:
+                            for (x=0; x < series.size(); x++) {
+                                serieAtual = series.get(x);
+                                nomeSerie = serieAtual.getNome();
+                                System.out.println(x + "-" + nomeSerie);
+                            }
+                            System.out.println("Qual Serie deseja ascessar?");
+                            opcao = teclado.nextInt();
+
+                            serieAtual = series.get(opcao);
+                            System.out.println(serieAtual.getNome());
+                            System.out.println(serieAtual.getAno());
+                            System.out.println(serieAtual.getCategoria());
+                            System.out.println(serieAtual.getSinopse());
+                            System.out.println(serieAtual.getTempo()+"H");
+                            System.out.println("1-Iniciar\n2-Sair");
+                            opcao = teclado.nextInt();
+                            if (opcao == 1){
+                                System.out.println(serieAtual.getTemporada()+"Temporadas.");
+                                System.out.println("Qual temporada deseja assistir?");
+                                opcao = teclado.nextInt();
+                                temporada = opcao;
+
+                                if (temporada > 0 && temporada <= serieAtual.getTemporada()){
+                                    System.out.println(serieAtual.getEpsodio() + "Epsodios");
+                                    System.out.println("Qual ep deseja assistir?");
+                                    opcao = teclado.nextInt();
+                                    if (opcao > 0 && opcao <= serieAtual.getEpsodio()){
+                                        System.out.println("Reproduzir temporada" + temporada + "Epsodio" + opcao);
+                                    }else {
+                                        System.out.println("Epsodio inexistente");
+                                    }
+                                }
+
+                            }
+                            System.out.println("1-Sair");
+                            resposta = teclado.nextInt();
+                            break;
+                        case 3:
+                            for (x=0; x < animes.size(); x++) {
+                                serieAtual = animes.get(x);
+                                nomeSerie = serieAtual.getNome();
+                                System.out.println(x + "-" + nomeSerie);
+                            }
+                            System.out.println("Qual anime deseja ascessar?");
+                            opcao = teclado.nextInt();
+
+                            serieAtual = animes.get(opcao);
+                            System.out.println(serieAtual.getNome());
+                            System.out.println(serieAtual.getAno());
+                            System.out.println(serieAtual.getCategoria());
+                            System.out.println(serieAtual.getSinopse());
+                            System.out.println(serieAtual.getTempo()+"H");
+                            System.out.println("1-Iniciar\n2-Sair");
+                            opcao = teclado.nextInt();
+                            if (opcao == 1){
+                                System.out.println(serieAtual.getTemporada()+"Temporadas.");
+                                System.out.println("Qual temporada deseja assistir?");
+                                opcao = teclado.nextInt();
+                                temporada = opcao;
+
+                                if (temporada > 0 && temporada <= serieAtual.getTemporada()){
+                                    System.out.println(serieAtual.getEpsodio() + "Epsodios");
+                                    System.out.println("Qual ep deseja assistir?");
+                                    opcao = teclado.nextInt();
+                                    if (opcao > 0 && opcao <= serieAtual.getEpsodio()){
+                                        System.out.println("Reproduzir temporada" + temporada + "Epsodio" + opcao);
+                                    }else {
+                                        System.out.println("Epsodio inexistente");
+                                    }
+                                }
+
+                            }
+                            System.out.println("1-Sair");
+                            resposta = teclado.nextInt();
+                            break;
+                        case 4:
+                            break;
+                        case 5:
+                            if (clienteLogado.getNivel() == 5){
+
+                            }
+                            break;
+                        default:
+                            System.out.println("Opção invalida");
+                    }
+
+                }while(resposta != 1);
+
             }
 
         } while (opcao != 3);
