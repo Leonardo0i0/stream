@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class Main {
+
     public static void main(String[] args) {
         String usuario = null, email = null, senha, senha1, nomeFilme;
         int opcao, nivel, numero, x, c = 0, f = 0, s = 0, a = 0, resposta=0, tamanho;
@@ -170,7 +172,13 @@ public class Main {
                             System.out.println(x + "-" + nomeFilme);
                         }
                         System.out.println("Qual filme deseja assistir?");
-
+                        opcao = teclado.nextInt();
+                        filmeAtual = filmes.get(opcao);
+                        System.out.println(filmeAtual.getNome());
+                        System.out.println(filmeAtual.getAno());
+                        System.out.println(filmeAtual.getCategoria());
+                        System.out.println(filmeAtual.getSinopse());
+                        System.out.println(filmeAtual.getTempo()+"H");
                         break;
                 }
             }
