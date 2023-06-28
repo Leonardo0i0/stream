@@ -5,8 +5,11 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        String usuario = null, email = null, senha, senha1, nomeFilme, nomeSerie, nomeAnime;
-        int opcao, nivel, numero, x, c = 0, f = 0, s = 0, a = 0, resposta=0, tamanho, temporada;
+        String usuario = null, email = null, senha, senha1;
+        String nomeSerie, nomeAnime = null, nomeFilme, sinopse, categoria;
+        int ano;
+        float tempo,nota;
+        int opcao, nivel, numero, x, c = 0, f = 0, s = 0, a = 0, resposta=0, temporada, epsodios;
         boolean loginEfetuado;
 
         Scanner teclado = new Scanner(System.in);
@@ -17,11 +20,13 @@ public class Main {
         ArrayList<serie> animes = new ArrayList<>();
 
         cliente novoCliente = new cliente();
-        filme novoFilme = new filme();
-        serie novaSerie = new serie();
-        filme filmeAtual = null;
-        serie serieAtual = null;
         cliente clienteLogado = null;
+
+        filme filmeAtual = null;
+
+        serie novaSerie = new serie();
+        serie serieAtual = null;
+
 
         novoCliente.trocarnome("Leonardo");
         novoCliente.trocarnumero(123456);
@@ -268,8 +273,57 @@ public class Main {
                         case 4:
                             break;
                         case 5:
+                            filme novoFilme = new filme();
                             if (clienteLogado.getNivel() == 5){
+                                System.out.println("Seja bem vindo ADM:" + clienteLogado.getUsuario());
+                                System.out.println("O senhor deseja: \n1-Adcionar ao catalogo\n2-Editar o catalogo\n3-excluir um item do catalogo");
+                                opcao = teclado.nextInt();
+                                switch (opcao){
+                                    case 1:
+                                        System.out.println("Ira adcionar \n1-Filme\n2-Serie\n3-Anome");
+                                        resposta = teclado.nextInt();
+                                        if (resposta == 1){
+                                            do {
+                                                System.out.println("nome do filme:");
+                                                nomeFilme = teclado.nextLine();
+                                                System.out.println("Sinopse:");
+                                                sinopse = teclado.nextLine();
+                                                System.out.println("Categoria:");
+                                                categoria = teclado.nextLine();
+                                                System.out.println("Ano de lançamento:");
+                                                ano = teclado.nextInt();
+                                                System.out.println("Duração do filme:");
+                                                tempo = teclado.nextFloat();
+                                                System.out.println("Nota atual do filme");
+                                                nota = teclado.nextFloat();
 
+                                                System.out.println("Verifique as informações a seguir");
+                                                System.out.println("Nome: "+ nomeFilme);
+                                                System.out.println("Snopse: " + sinopse);
+                                                System.out.println("Categoria: " + categoria);
+                                                System.out.println("Ano de lançamento: " + ano);
+                                                System.out.println("Duração do filme: " + tempo);
+                                                System.out.println("Nota do filme: " + nota );
+                                                System.out.println("Estão corretas?1-Sim 2-Não");
+                                                resposta = teclado.nextInt();
+                                            }while (resposta != 1);
+
+                                            novoFilme.trocarnome(nomeAnime);
+                                            novoFilme.trocarsinopse(sinopse);
+                                            novoFilme.trocarcategoria(categoria);
+                                            novoFilme.trocarano(ano);
+                                            novoFilme.trocartempo(tempo);
+                                            novoFilme.trocarnota(nota);
+                                            filmes.add(novoFilme);
+                                        }
+                                        break;
+                                    case 2:
+                                        break;
+                                    case 3:
+                                        break;
+                                }
+                            }else {
+                                System.out.println("Opção invalida");
                             }
                             break;
                         default:

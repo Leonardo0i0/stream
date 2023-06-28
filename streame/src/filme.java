@@ -1,8 +1,7 @@
-import java.util.ArrayList;
-import java.util.List;
 public class filme {
     private String nome, sinopse, categoria;
-    private int nota, tempo, ano;
+    private int ano;
+    private float tempo, nota;
 
 
     public String getNome() {
@@ -17,7 +16,7 @@ public class filme {
         return categoria;
     }
 
-    public int getNota() {
+    public float getNota() {
         return nota;
     }
 
@@ -25,7 +24,7 @@ public class filme {
         return ano;
     }
 
-    public int getTempo() {
+    public float getTempo() {
         return tempo;
     }
 
@@ -38,10 +37,10 @@ public class filme {
     void trocarcategoria(String Categoria){
         categoria = Categoria;
     }
-    void trocarnota(int Nota){
+    void trocarnota(float Nota){
         nota = Nota;
     }
-    void trocartempo(int Tempo){
+    void trocartempo(float Tempo){
         tempo = Tempo;
     }
     void trocarano(int Ano){
