@@ -3,8 +3,9 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        String usuario = null, email = null, senha, senha1;
-        int opcao, nivel, numero, x, c = 0, f = 0, s = 0, a = 0, resposta=0;
+        String usuario = null, email = null, senha, senha1, nomeFilme;
+        int opcao, nivel, numero, x, c = 0, f = 0, s = 0, a = 0, resposta=0, tamanho;
+        boolean loginEfetuado;
 
         Scanner teclado = new Scanner(System.in);
 
@@ -14,6 +15,10 @@ public class Main {
         ArrayList<serie> animes = new ArrayList<>();
 
         cliente novoCliente = new cliente();
+        filme filmeAtual = null;
+        serie serieAtual;
+        serie animeAtual;
+        cliente clienteLogado = null;
 
         novoCliente.trocarnome("Leonardo");
         novoCliente.trocarnumero(123456);
@@ -127,25 +132,46 @@ public class Main {
                 } while (resposta != 1);
 
             } else {
-                System.out.println("Insira seu login.");
-                usuario = teclado.nextLine();
-                usuario = teclado.nextLine();
+                do {
+                    System.out.println("Insira seu login.");
+                    usuario = teclado.nextLine();
+                    usuario = teclado.nextLine();
 
-                System.out.println("insira a sua senha.");
-                senha = teclado.nextLine();
+                    System.out.println("insira a sua senha.");
+                    senha = teclado.nextLine();
 
-                boolean loginEfetuado = false;
-                for (cliente cliente : clientes) {
-                    if (usuario.equals(cliente.getUsuario()) && senha.equals(cliente.getSenha())) {
-                        // Login efetuado com sucesso
-                        System.out.println("Login efetuado com sucesso!");
-                        loginEfetuado = true;
-                        break;
+                    loginEfetuado = false;
+                    for (cliente cliente : clientes) {
+                        if (usuario.equals(cliente.getUsuario()) && senha.equals(cliente.getSenha())) {
+                            // Login efetuado com sucesso
+                            System.out.println("Login efetuado com sucesso!");
+                            clienteLogado = cliente;
+                            loginEfetuado = true;
+                            break;
+                        }
                     }
-                }
 
-                if (!loginEfetuado) {
-                    System.out.println("Credenciais inválidas. Tente novamente.");
+                    if (loginEfetuado == false) {
+                        System.out.println("Credenciais inválidas. Tente novamente.");
+                    }
+                }while (loginEfetuado != true);
+                System.out.println("Nosso catalogo de:\n1-Filmes\n2-Series\n3-Animes\n4-Pesquisar Catalogo");
+                if (clienteLogado.getNivel() == 5){
+                    System.out.println("5-Editar catalogo");
+                }
+                System.out.println("Escolha qual o senhor deseja ver para ascessar o catalogo completo.");
+                opcao = teclado.nextInt();
+
+                switch (opcao){
+                    case 1:
+                        for (x=0; x < filmes.size(); x++) {
+                            filmeAtual = filmes.get(x);
+                            nomeFilme = filmeAtual.getNome();
+                            System.out.println(x + "-" + nomeFilme);
+                        }
+                        System.out.println("Qual filme deseja assistir?");
+
+                        break;
                 }
             }
 
